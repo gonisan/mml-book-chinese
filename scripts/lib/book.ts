@@ -121,6 +121,14 @@ function sortWeight(fileBase: string): number {
   return minor ?? 5000
 }
 
+/** 章标题里可能已经带了章号（如 "# 3 解析几何"），避免和侧边栏前缀重复 */
+function stripChapterPrefix(title: string, num: number): string {
+  const stripped = title
+    .replace(new RegExp(`^${num}(?!\\d)\\s*[.、:：·]?\\s*`), '')
+    .trim()
+  return stripped || title
+}
+
 function readChapter(partNum: number, dirName: string, chapterDir: string): Chapter {
   const num = Number(dirName)
   const files = listMarkdown(chapterDir).sort((a, b) => {
@@ -159,7 +167,7 @@ function readChapter(partNum: number, dirName: string, chapterDir: string): Chap
     return makePage(srcAbs, srcRel, `${prefix}/${slug}.md`)
   })
 
-  const title = pages[0]?.title ?? `第 ${num} 章`
+  const title = stripChapterPrefix(pages[0]?.title ?? `第 ${num} 章`, num)
 
   return { num, title, pages }
 }
