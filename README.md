@@ -12,6 +12,26 @@
 
 [常见问题](https://github.com/dxxzst/mml-book-chinese/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98)
 
+## 本地运行站点
+
+本站用 VitePress 构建，公式由 MathJax 在构建期渲染成 SVG（不依赖客户端 JS 加载公式库）。
+
+```bash
+pnpm install
+pnpm dev      # 本地开发，默认 http://localhost:5173
+pnpm build    # 构建静态站点到 .vitepress/dist
+pnpm preview  # 预览构建结果
+pnpm verify   # 体检产物：公式节点、渲染错误、缺失图片、站内死链
+```
+
+> 如果终端注入了 `NODE_OPTIONS`（某些 IDE / Agent 环境会包一层 stdout 代理），构建可能报 `write EPIPE`，用 `env -u NODE_OPTIONS pnpm build` 绕过即可，与项目本身无关。
+
+Markdown 源文件保持在仓库原位，不改动正文：
+
+- `.vitepress/config.ts` 用 `rewrites` 把 `1.Part I .../2/2.1SystemsOfLinearEquations.md` 映射成 `/part1/02-linear-algebra/2-1-systems-of-linear-equations`；
+- `.vitepress/plugins/math-spaces.ts` 在解析前把 `$ N_1 $` 这类定界符内侧带空格的行内公式归一化成 `$N_1$`，并把表格单元格里的 `$$ ... $$` 降级为行内公式；
+- 侧边栏、导航、章节标题由 `scripts/lib/book.ts` 扫描目录和首个标题自动生成，新增章节无需手改配置。
+
 # 目录
 
 - [x] 前言

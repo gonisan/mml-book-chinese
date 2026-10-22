@@ -1,0 +1,61 @@
+:root {
+  --vp-c-brand-1: #185fa5;
+  --vp-c-brand-2: #1d6fbd;
+  --vp-c-brand-3: #2f88d4;
+  --vp-c-brand-soft: rgba(24, 95, 165, 0.12);
+}
+
+@media (min-width: 960px) {
+  .VPDoc .content-container {
+    max-width: 760px;
+  }
+}
+
+/* 原文插图统一包在 <p align="center"><img><br><b>图注</b></p> 里 */
+.vp-doc p[align='center'] {
+  text-align: center;
+  margin: 28px 0;
+}
+
+.vp-doc p[align='center'] img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  border-radius: 6px;
+}
+
+.vp-doc p[align='center'] b {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--vp-c-text-2);
+}
+
+/* 长公式在窄屏下横向滚动，不撑破正文 */
+.vp-doc mjx-container {
+  max-width: 100%;
+}
+
+.vp-doc mjx-container[display='true'] {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 6px 0;
+}
+
+.vp-doc mjx-container[display='true']::-webkit-scrollbar {
+  height: 6px;
+}
+
+.vp-doc mjx-container[display='true']::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: var(--vp-c-divider);
+}
+
+/* 表格在窄屏下可横向滚动 */
+.vp-doc table {
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
+}
