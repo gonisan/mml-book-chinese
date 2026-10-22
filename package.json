@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@12.14.0",
+  "packageManager": "pnpm@12.15.0",
   "scripts": {
     "dev": "vitepress dev",
-    "build": "vitepress build",
+    "build": "NODE_OPTIONS=--max-old-space-size=4096 vitepress build",
     "preview": "vitepress preview",
     "verify": "node scripts/verify-dist.mjs"
   },
